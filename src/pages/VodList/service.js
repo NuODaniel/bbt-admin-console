@@ -1,4 +1,13 @@
 import request from '@/utils/request';
+
+const apikey = 'f6fdffe48c908deb0f4c3bd36c032e72';
+
+async function reqWithApikey(url, options) {
+  return request(`${url}?apikey=${apikey}`, {
+    options,
+  });
+}
+
 export async function queryRule(params) {
   return request('/api/rule', {
     params,
@@ -23,9 +32,8 @@ export async function updateRule(params) {
   });
 }
 
-export async function ping(params){
-  return request('/api/v1/ping', {
+export async function ping(params) {
+  return reqWithApikey('/api/v1/ping', {
     params,
-  })
-
+  });
 }

@@ -18,7 +18,6 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
     "start": "cross-env UMI_ENV=dev umi dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev",
@@ -30,11 +29,12 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
-    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
+    "**/*.{js,jsx,ts,tsx}": "",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
     ]
@@ -61,7 +61,8 @@
     "react-dom": "^17.0.0",
     "react-helmet-async": "^1.0.4",
     "umi": "^3.4.1",
-    "umi-request": "^1.0.8"
+    "umi-request": "^1.0.8",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^1.0.28",
@@ -88,6 +89,7 @@
     "eslint": "^7.1.0",
     "express": "^4.17.1",
     "gh-pages": "^3.0.0",
+    "husky": "^7.0.0",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.0",
     "mockjs": "^1.0.1-beta3",

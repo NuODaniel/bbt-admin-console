@@ -9,7 +9,7 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://127.0.0.1:18021',
+      target: 'http://api.bifang.city',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
@@ -18,7 +18,7 @@ export default {
   },
   test: {
     '/api/': {
-      target: 'https://lapi.hxjing.com',
+      target: 'https://lapi.bifang.com',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
@@ -27,7 +27,7 @@ export default {
   },
   pre: {
     '/api/': {
-      target: 'https://lapi.hxjing.com',
+      target: 'https://lapi.bifang.com',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
