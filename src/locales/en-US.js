@@ -21,4 +21,5 @@ export default {
   ...pwa,
   ...component,
   ...pages,
+  'app.name': 'Bifang'
 };

@@ -1,4 +1,6 @@
-import { Input } from 'antd';
+import { PageContainer } from '@ant-design/pro-layout';
+import ProTable from '@ant-design/pro-table';
+import { Button, Input } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { ping } from './service';
@@ -10,8 +12,8 @@ import { ping } from './service';
 
 const VodList = () => {
   const resp = ping();
-  console.log(resp);
 
+  const actionRef = useRef()
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
@@ -146,7 +148,23 @@ const VodList = () => {
       ],
     },
   ];
-  return <div>asdf</div>;
+  return (
+  <PageContainer>
+    <ProTable
+      actionRef={actionRef}
+    />
+    <Button
+    onClick={() => {
+      console.log("click");
+      actionRef.current?.reload();
+    }}
+    >
+      <FormattedMessage
+        id="app.name"
+      />
+    </Button>
+  </PageContainer>
+  );
 };
 
 export default VodList;
