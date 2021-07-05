@@ -8,13 +8,20 @@
  */
 export default {
   dev: {
-    '/bbt/': {
+    '/bbt': {
       target: 'http://localhost:2582',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
       },
     },
+    '/admin/': {
+      target: 'http://localhost:2582',
+      changeOrigin: true,
+      pathRewrite: {
+        '^': '',
+      },
+    }
   },
   test: {
     '/api/': {

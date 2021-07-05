@@ -7,6 +7,15 @@ export async function queryPortFolios(params) {
   });
 }
 
+export async function addPortFolio(data) {
+  console.log("123", data);
+  return request('/admin/portfolio/upload', {
+    method: 'POST',
+    data,
+    requestType: "form",
+  })
+}
+
 export async function removeRule(params) {
   return request('/api/rule', {
     method: 'POST',
