@@ -2,6 +2,7 @@ import request from '@/utils/request';
 
 export async function queryPortFolios(params) {
   return request('/bbt/portfolio', {
+    method: 'GET',
     params,
   });
 }

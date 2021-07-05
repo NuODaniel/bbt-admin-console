@@ -9,7 +9,7 @@
 export default {
   dev: {
     '/bbt/': {
-      target: 'http://localhost',
+      target: 'http://localhost:2582',
       changeOrigin: true,
       pathRewrite: {
         '^': '',

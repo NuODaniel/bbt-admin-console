@@ -259,7 +259,7 @@ const TableList = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
           </Button>,
         ]}
-        request={(a, b, c) => {return queryRule({...a, sorter:b, filter:c})}}
+        request={(params, sorter, filter) => {return queryRule({...params, sorter, filter})}}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
