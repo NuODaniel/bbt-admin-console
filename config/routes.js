@@ -50,10 +50,10 @@ export default [
                 ],
               },
               {
-                path: '/videos',
-                name: 'videos',
+                path: '/portfolios',
+                name: 'portfolios',
                 icon: 'table',
-                component: './VodList'
+                component: './PortfoliosList',
               },
               {
                 name: 'list.table-list',
