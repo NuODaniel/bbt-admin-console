@@ -1,59 +1,59 @@
 import { PageContainer } from '@ant-design/pro-layout';
-import ProTable from '@ant-design/pro-table';
-import { Button, Input, Table } from 'antd';
-import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
-import { queryPortFolios } from './service';
-/**
- * @en-US Add node
- * @zh-CN 添加节点
- * @param fields
- */
+import { Button, Table, Image } from 'antd';
+import React  from 'react';
+import { FormattedMessage } from 'umi';
+import reqwest from 'reqwest';
+
+
+const getRandomuserParams = params => ({
+  limit: params.pagination.pageSize,
+  page: params.pagination.current,
+  type: params.type
+});
 
 class PortfoliosList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      pagination: {
+        current: 1,
+        pageSize: 10,
+      },
+      type: 0,
+      loading: false,
+    };
+  }
   componentDidMount() {
-    const { pagination } = this.state;
-    this.fetch({ pagination });
+    const { pagination, type } = this.state;
+    this.fetch({ pagination, type});
   }
 
-  render = () => {
-    const actionRef = useRef();
-    /**
-     * @en-US The pop-up window of the distribution update window
-     * @zh-CN 分布更新窗口的弹窗
-     * */
-
-    const [handleUpdateModalVisible] = useState(false);
-    const [setShowDetail] = useState(false);
-    const [setCurrentRow] = useState();
-    /**
-     * @en-US International configuration
-     * @zh-CN 国际化配置
-     * */
-
-    fetch = (params = {}) => {
-      this.setState({ loading: true });
-      reqwest({
-        url: 'http://localhost:2582/bbt/portfolios?type=0',
-        method: 'get',
-        type: 'json',
-        data: getRandomuserParams(params),
-      }).then((data) => {
-        console.log(data);
-        this.setState({
-          loading: false,
-          data: data.results,
-          pagination: {
-            ...params.pagination,
-            total: 200,
-            // 200 is mock data, you should read it from server
-            // total: data.totalCount,
-          },
-        });
+  
+  fetch = (params = {}) => {
+    this.setState({ loading: true });
+    reqwest({
+      url: 'http://localhost:2582/bbt/portfolio',
+      method: 'get',
+      type: 'json',
+      data: getRandomuserParams(params),
+    }).then((resp) => {
+      console.log(resp);
+      this.setState({
+        loading: false,
+        data: resp.data,
+        pagination: {
+          ...params.pagination,
+          total: 200,
+          // 200 is mock data, you should read it from server
+          // total: data.totalCount,
+        },
       });
-    };
+    });
+  };
 
-    const intl = useIntl();
+
+  render = () => {
     const columns = [
       {
         title: <FormattedMessage id="pages.portofiles.id" defaultMessage="Id" />,
@@ -62,8 +62,8 @@ class PortfoliosList extends React.Component {
           return (
             <a
               onClick={() => {
-                setCurrentRow(entity);
-                setShowDetail(true);
+                // setCurrentRow(entity);
+                // setShowDetail(true);
               }}
             >
               {dom}
@@ -125,6 +125,7 @@ class PortfoliosList extends React.Component {
           >
             <FormattedMessage id="pages.portofolios.delete" defaultMessage="delete" />
           </a>,
+          <span>  </span>,
           <a key="update" href="https://procomponents.ant.design/">
             <FormattedMessage id="pages.portofolios.modify" defaultMessage="modify" />
           </a>,
@@ -133,11 +134,21 @@ class PortfoliosList extends React.Component {
     ];
     return (
       <PageContainer>
-        <Table columns={columns} />
+        <Button>
+          new portfolio
+        </Button>
+        <Table 
+          dataSource={this.state.data}
+          columns={columns}
+          pagination={{ 
+            position:['bottomRight'],
+            pageSize: 10,
+            total: this.state.total
+          }}
+           />
         <Button
           onClick={() => {
             console.log('click');
-            actionRef.current?.reload();
           }}
         ></Button>
       </PageContainer>

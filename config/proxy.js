@@ -8,8 +8,8 @@
  */
 export default {
   dev: {
-    '/api/': {
-      target: 'http://api.bifang.city',
+    '/bbt/': {
+      target: 'http://localhost',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
