@@ -33,34 +33,34 @@ export default [
                 icon: 'smile',
                 component: './Welcome',
               },
-              {
-                path: '/admin',
-                name: 'admin',
-                icon: 'crown',
-                component: './Admin',
-                authority: ['admin'],
-                routes: [
-                  {
-                    path: '/admin/sub-page',
-                    name: 'sub-page',
-                    icon: 'smile',
-                    component: './Welcome',
-                    authority: ['admin'],
-                  },
-                ],
-              },
+              // {
+              //   path: '/admin',
+              //   name: 'admin',
+              //   icon: 'crown',
+              //   component: './Admin',
+              //   authority: ['admin'],
+              //   routes: [
+              //     {
+              //       path: '/admin/sub-page',
+              //       name: 'sub-page',
+              //       icon: 'smile',
+              //       component: './Welcome',
+              //       authority: ['admin'],
+              //     },
+              //   ],
+              // },
               {
                 path: '/portfolios',
                 name: 'portfolios',
                 icon: 'table',
                 component: './PortfoliosList',
               },
-              {
-                name: 'list.table-list',
-                icon: 'table',
-                path: '/list',
-                component: './TableList',
-              },
+              // {
+              //   name: 'list.table-list',
+              //   icon: 'table',
+              //   path: '/list',
+              //   component: './TableList',
+              // },
               {
                 component: './404',
               },

@@ -62,4 +62,18 @@ export default {
   'pages.searchTable.tenThousand': '万',
   'pages.searchTable.batchDeletion': '批量删除',
   'pages.searchTable.batchApproval': '批量审批',
+
+  'pages.portfolios.id': 'id',
+  'pages.portfolios.title': '标题',
+  'pages.portfolios.desc': '描述',
+  'pages.portfolios.type': '分类',
+  'pages.portfolios.image': '图片',
+  'pages.portfolios.operations': '操作',
+  'pages.portfolios.delete': '删除',
+  'pages.portfolios.new': '新增',
+  'pages.portfolios.newPortfolio': '新增作品',
+  'pages.portfolios.poster': '海报',
+  'pages.portfolios.oilpaint': '油画',
+  'pages.portfolios.photography': '摄影作品',
+  'pages.portfolios.food': '美食',
 };

@@ -65,4 +65,18 @@ export default {
   'pages.searchTable.tenThousand': '0000',
   'pages.searchTable.batchDeletion': 'bacth deletion',
   'pages.searchTable.batchApproval': 'batch approval',
+
+  'pages.portfolios.id': 'Id',
+  'pages.portfolios.title': 'Title',
+  'pages.portfolios.desc': 'Desc',
+  'pages.portfolios.type': 'Type',
+  'pages.portfolios.image': 'Image',
+  'pages.portfolios.operations': 'Operations',
+  'pages.portfolios.delete': 'Delete',
+  'pages.portfolios.new': 'New',
+  'pages.portfolios.newPortfolio': 'New Portfolio',
+  'pages.portfolios.poster': 'Poster',
+  'pages.portfolios.oilpaint': 'Oil Paint',
+  'pages.portfolios.photography': 'Photography',
+  'pages.portfolios.food': 'Food',
 };

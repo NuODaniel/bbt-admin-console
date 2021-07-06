@@ -148,7 +148,7 @@ const BasicLayout = (props) => {
         return menuData || [];
       }}
       waterMarkProps={{
-        content: 'Ant Design Pro',
+        content: 'Bianbuting',
         fontColor: 'rgba(24,144,255,0.15)',
       }}
     >
