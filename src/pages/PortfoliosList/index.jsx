@@ -2,7 +2,7 @@ import { PageContainer  } from '@ant-design/pro-layout';
 import { PlusOutlined } from '@ant-design/icons';
 import { Form, Upload, Select, Button, Table, Image, PageHeader } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import React, { useState,useEffect  }  from 'react';
+import React, { useState,useEffect, useRef  }  from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { queryPortFolios } from './service.js';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form'
@@ -15,6 +15,7 @@ const pageLimit = 10;
 
 const PortfoliosList = () => {
 
+  const actionRef = useRef();
   const { Option } = Select;
   /**
    * @en-US Pop-up window of new window
@@ -34,13 +35,24 @@ const PortfoliosList = () => {
     });
   }
 
+
+  // 取消上传
+  const handlerRemoveUploadFile = (file) => {
+    setFileLists(file => {
+      const index = fileList.indexOf(file);
+      const newFileList = fileList.slice();
+      newFileList.splice(index, 1);
+      return newFileList;
+    });
+  }
+
   //截断自动上传
   const handleBeforeUploadFile = (file) => {
-    console.log("handle before", file)
-    console.log("fileList", fileList)
+    console.log("handle before", file);
+    console.log("fileList", fileList);
     
     //TODO DEBUG
-    setFileLists([file])
+    setFileLists([...fileList, file]);
     // 使用 beforeUpload 會失去在選擇圖片後馬上看到圖片的功能，因此利用FileReader方法來實現預覽效果
     return false
   };
@@ -124,8 +136,7 @@ const PortfoliosList = () => {
   ];
   return (
     <PageContainer >
-      <PageHeader
-        title="Portfolios"
+      <div
         className="site_wrapper"
         >
         <Button
@@ -137,7 +148,7 @@ const PortfoliosList = () => {
         >
           <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
         </Button>
-      </PageHeader>
+      </div>
       <Table 
         dataSource={ portfolios }
         columns={columns}
@@ -153,7 +164,15 @@ const PortfoliosList = () => {
         onFinish={async (value) => {
           console.log(value);
           const formData = new FormData();
-          Object.keys(value).forEach(key => formData.append(key, value[key]));
+          Object.keys(value).forEach(key => {
+            if (key != "file"){
+              formData.append(key, value[key]);
+            }else {
+              fileList.forEach(file => {
+                formData.append("file", file);
+              });
+            }
+          });
           console.log(formData);
           const success = await addPortFolio(formData);
 
@@ -181,10 +200,10 @@ const PortfoliosList = () => {
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
-            <Option value={1}>poster</Option>
-            <Option value={2}>oilpaint</Option>
-            <Option value={3}>photography</Option>
-            <Option value={4}>food</Option>
+            <Option value={"1"}>poster</Option>
+            <Option value={"2"}>oilpaint</Option>
+            <Option value={"3"}>photography</Option>
+            <Option value={"4"}>food</Option>
           </Select>
         </Form.Item>
 
