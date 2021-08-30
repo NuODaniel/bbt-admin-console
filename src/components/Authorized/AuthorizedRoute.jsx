@@ -8,13 +8,15 @@ const AuthorizedRoute = ({ component: Component, render, authority, redirectPath
     noMatch={
       <Route
         {...rest}
-        render={() => (
+        render={() => {
+          console.log("auth redirect");
+          return (
           <Redirect
             to={{
               pathname: redirectPath,
             }}
           />
-        )}
+        )}}
       />
     }
   >

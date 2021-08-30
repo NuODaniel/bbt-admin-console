@@ -9,14 +9,14 @@
 export default {
   dev: {
     '/bbt': {
-      target: 'http://localhost:9990',
+      target: 'http://localhost:2582',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
       },
     },
     '/admin/': {
-      target: 'http://localhost:9990',
+      target: 'http://localhost:2582',
       changeOrigin: true,
       pathRewrite: {
         '^': '',

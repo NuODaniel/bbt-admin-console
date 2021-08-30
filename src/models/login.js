@@ -42,6 +42,7 @@ const Model = {
             return;
           }
         }
+        console.log("end");
 
         history.replace(redirect || '/');
       }
