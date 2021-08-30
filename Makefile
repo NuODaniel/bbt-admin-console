@@ -11,7 +11,12 @@ dist:
 	npm run build
 
 image: dist
-	docker build -f Dockerfile -t $(IMAGE_NAME):$(TAG_VERSION)-$(shell git rev-parse --short HEAD) .
+	mkdir docker_build_tmp 
+	cp Dockerfile ./docker_build_tmp/
+	cp -r nginx ./docker_build_tmp/
+	cp -r dist ./docker_build_tmp/
+	docker build -f Dockerfile -t $(IMAGE_NAME):$(TAG_VERSION)-$(shell git rev-parse --short HEAD) docker_build_tmp
+	rm -rf docker_build_tmp
 
 clean:
 	rm -rf dist
