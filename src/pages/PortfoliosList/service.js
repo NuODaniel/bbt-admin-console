@@ -8,7 +8,7 @@ export async function queryPortFolios(params) {
 }
 
 export async function addPortFolio(data) {
-  return request('/admin/portfolio/upload', {
+  return request('/admin/api/portfolio/upload', {
     method: 'POST',
     data,
     requestType: 'form',
@@ -16,7 +16,7 @@ export async function addPortFolio(data) {
 }
 
 export async function deletePortFolio(data) {
-  return request('/admin/portfolio/' + data.id, {
+  return request('/admin/api/portfolio/' + data.id, {
     method: 'DELETE',
   });
 }
