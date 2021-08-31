@@ -20,36 +20,17 @@ const PortfoliosList = () => {
    *  */
   const [createModalVisible, handleModalVisible] = useState(false);
 
-  const [fileList, setFileLists] = useState([]);
-
   const [portfolios, setPorfolios] = useState([]);
 
+  const [form] = Form.useForm();
+  const resetForm = () => {
+    form.resetFields();
+  }
   //翻页
   const handlePageChange = (val) => {
     queryPortFolios({ type: 0, page: val > 0 ? val - 1 : 0, limit: pageLimit }).then((resp) => {
       setPorfolios(resp.data);
     });
-  };
-
-  // 取消上传
-  const handlerRemoveUploadFile = (file) => {
-    setFileLists((file) => {
-      const index = fileList.indexOf(file);
-      const newFileList = fileList.slice();
-      newFileList.splice(index, 1);
-      return newFileList;
-    });
-  };
-
-  //截断自动上传
-  const handleBeforeUploadFile = (file) => {
-    console.log('handle before', file);
-    console.log('fileList', fileList);
-
-    //TODO DEBUG
-    setFileLists([...fileList, file]);
-    // 使用 beforeUpload 會失去在選擇圖片後馬上看到圖片的功能，因此利用FileReader方法來實現預覽效果
-    return false;
   };
 
   //i18n
@@ -133,23 +114,26 @@ const PortfoliosList = () => {
       </div>
       <Table rowKey={(record) => record.id} dataSource={portfolios} columns={columns} />
       <ModalForm
+        form={form}
         title={intl.formatMessage({
           id: 'pages.portfolios.newPortfolio',
           defaultMessage: 'New Portfolio',
         })}
         width="400px"
+        submit={(e)=>{
+          console.log("123", this, e);
+        }}
         visible={createModalVisible}
         onVisibleChange={handleModalVisible}
         onFinish={async (value) => {
+          console.log("props", this);
           console.log(value);
           const formData = new FormData();
           Object.keys(value).forEach((key) => {
             if (key != 'file') {
               formData.append(key, value[key]);
             } else {
-              fileList.forEach((file) => {
-                formData.append('file', file);
-              });
+              formData.append('file', value[key]?.file);
             }
           });
           console.log(formData);
@@ -162,6 +146,7 @@ const PortfoliosList = () => {
           } else {
             alert(resp.msg);
           }
+          resetForm();
         }}
       >
         <Form.Item
@@ -212,8 +197,8 @@ const PortfoliosList = () => {
         <ProFormText width="md" placeholder="enter a title" name="title" />
 
         <ProFormTextArea width="md" placeholder="enter a description" name="desc" />
-        <Form.Item name="file" label="Upload">
-          <Upload name="file" listType="picture" beforeUpload={handleBeforeUploadFile}>
+        <Form.Item name="file" label="file">
+          <Upload name="file" listType="picture" beforeUpload={() => false}>
             <Button icon={<UploadOutlined />}>Select File</Button>
           </Upload>
         </Form.Item>
